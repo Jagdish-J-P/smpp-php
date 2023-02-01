@@ -1,0 +1,21 @@
+{
+    "name": "jagdish-j-p/smpp-php",
+    "description": "PHP Implementation of SMPP protocol to send sms.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "JagdishJP\\SmppPhp\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Jagdish Patel",
+            "email": "jagdish.j.ptl@gmail.com"
+        }
+    ],
+    "require": {}
+}
