@@ -42,9 +42,28 @@ class Smpp
         $this->initTags();
 	}
 
-    public function login($senderId = '', $username = '', $password = '')
+    public function smpp()
+    {
+        return $this->smpp;
+    }
+
+    public function bindTransmitter($senderId = '', $username = '', $password = '')
     {
         $this->smpp->bindTransmitter($username, $password);
+
+		$this->senderId = new SmppAddress(GsmEncoder::utf8_to_gsm0338($senderId), SmppConstants::TON_ALPHANUMERIC);
+    }
+
+    public function bindReceiver($senderId = '', $username = '', $password = '')
+    {
+        $this->smpp->bindReceiver($username, $password);
+
+		$this->senderId = new SmppAddress(GsmEncoder::utf8_to_gsm0338($senderId), SmppConstants::TON_ALPHANUMERIC);
+    }
+
+    public function bindTransreceiver($senderId = '', $username = '', $password = '')
+    {
+        $this->smpp->bindReceiver($username, $password);
 
 		$this->senderId = new SmppAddress(GsmEncoder::utf8_to_gsm0338($senderId), SmppConstants::TON_ALPHANUMERIC);
     }
@@ -57,6 +76,11 @@ class Smpp
 	public function initTags()
 	{
 		$this->tags = null;
+	}
+
+	public function readSms()
+	{
+		return $this->smpp->readSMS();
 	}
 
 	public function sendSms($recipient, $message)
