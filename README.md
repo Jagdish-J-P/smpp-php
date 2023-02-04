@@ -16,7 +16,7 @@ composer require jagdish-j-p/smpp-php
 ```php
     use JagdishJP\SmppPhp\Smpp;
     
-    $smpp = new \JagdishJP\SmppPhp\Smpp('localhost',2775, true, true);
+    $smpp = new Smpp('localhost',2775, true, true);
     $smpp->bindTransmitter('SENDERID', 'USERNAME', 'PASSWORD');
 
     $response = $smpp->sendSms('recepient number', 'Message');
@@ -28,7 +28,7 @@ composer require jagdish-j-p/smpp-php
 ```php
     use JagdishJP\SmppPhp\Smpp;
     
-    $smpp = new \JagdishJP\SmppPhp\Smpp('localhost',2775, true, true);
+    $smpp = new Smpp('localhost',2775, true, true);
     $smpp->bindReceiver('SENDERID', 'USERNAME', 'PASSWORD');
 
     $message = $smpp->readSms();
@@ -40,7 +40,7 @@ composer require jagdish-j-p/smpp-php
 ```php
     use JagdishJP\SmppPhp\Smpp;
     
-    $smpp = new \JagdishJP\SmppPhp\Smpp('localhost',2775, true, true);
+    $smpp = new Smpp('localhost',2775, true, true);
     $smpp->bindTransreceiver('SENDERID', 'USERNAME', 'PASSWORD');
 
     $response = $smpp->sendSms('recepient number', 'Message');
