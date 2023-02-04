@@ -80,6 +80,11 @@ class Smpp
         $this->tags = null;
     }
 
+    public function close()
+    {
+        return $this->smpp->close();
+    }
+
     public function readSms()
     {
         return $this->smpp->readSMS();
