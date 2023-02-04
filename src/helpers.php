@@ -6,22 +6,21 @@
  * installed, then these null functions will step in and act like cache
  * misses.
  */
-if (!function_exists('apc_fetch')) {
-	function apc_fetch($key)
-	{
-		return FALSE;
-	}
-	function apc_store($key, $var, $ttl = 0)
-	{
-		return FALSE;
-	}
+if (! function_exists('apc_fetch')) {
+    function apc_fetch($key)
+    {
+        return false;
+    }
+    function apc_store($key, $var, $ttl = 0)
+    {
+        return false;
+    }
 }
 
-
-if (!function_exists('printDebug')) {
-	// Simple debug callback
-	function printDebug($str)
-	{
-		echo date('Ymd H:i:s ') . $str . "\r\n";
-	}
+if (! function_exists('printDebug')) {
+    // Simple debug callback
+    function printDebug($str)
+    {
+        echo date('Ymd H:i:s ') . $str . "\r\n";
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace JagdishJP\SmppPhp\Transports;
 
 /*
@@ -22,72 +23,78 @@ namespace JagdishJP\SmppPhp\Transports;
 * @package thrift.transport
 */
 
-
 /**
  * Base interface for a transport agent.
- *
- * @package thrift.transport
  */
-abstract class TTransport {
+abstract class TTransport
+{
+    /**
+     * Whether this transport is open.
+     *
+     * @return bool true if open
+     */
+    abstract public function isOpen();
 
-	/**
-	 * Whether this transport is open.
-	 *
-	 * @return boolean true if open
-	 */
-	public abstract function isOpen();
+    /**
+     * Open the transport for reading/writing.
+     *
+     * @throws TTransportException if cannot open
+     */
+    abstract public function open();
 
-	/**
-	 * Open the transport for reading/writing
-	 *
-	 * @throws TTransportException if cannot open
-	 */
-	public abstract function open();
+    /**
+     * Close the transport.
+     */
+    abstract public function close();
 
-	/**
-	 * Close the transport.
-	 */
-	public abstract function close();
+    /**
+     * Read some data into the array.
+     *
+     * @param int $len How much to read
+     *
+     * @throws TTransportException if cannot read any more data
+     *
+     * @return string The data that has been read
+     */
+    abstract public function read($len);
 
-	/**
-	 * Read some data into the array.
-	 *
-	 * @param int    $len How much to read
-	 * @return string The data that has been read
-	 * @throws TTransportException if cannot read any more data
-	 */
-	public abstract function read($len);
+    /**
+     * Writes the given data out.
+     *
+     * @param string $buf The data to write
+     *
+     * @throws TTransportException if writing fails
+     */
+    abstract public function write($buf);
 
-	/**
-	 * Guarantees that the full amount of data is read.
-	 *
-	 * @return string The data, of exact length
-	 * @throws TTransportException if cannot read data
-	 */
-	public function readAll($len) {
-		// return $this->read($len);
+    /**
+     * Guarantees that the full amount of data is read.
+     *
+     * @param mixed $len
+     *
+     * @throws TTransportException if cannot read data
+     *
+     * @return string The data, of exact length
+     */
+    public function readAll($len)
+    {
+        // return $this->read($len);
 
-		$data = '';
-		$got = 0;
-		while (($got = strlen($data)) < $len) {
-			$data .= $this->read($len - $got);
-		}
-		return $data;
-	}
+        $data = '';
+        $got  = 0;
+        while (($got = strlen($data)) < $len) {
+            $data .= $this->read($len - $got);
+        }
 
-	/**
-	 * Writes the given data out.
-		*
-		* @param string $buf  The data to write
-		* @throws TTransportException if writing fails
-		*/
-	public abstract function write($buf);
+        return $data;
+    }
 
-	/**
-	 * Flushes any pending data out of a buffer
-	 *
-	 * @throws TTransportException if a writing error occurs
-	 */
-	public function flush() {
-	}
+    /**
+     * Flushes any pending data out of a buffer.
+     *
+     * @throws TTransportException if a writing error occurs
+     */
+    public function flush()
+    {
+    }
 }
