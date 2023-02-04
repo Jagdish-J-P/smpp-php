@@ -90,6 +90,16 @@ class Smpp
         return $this->smpp->readSMS();
     }
 
+    public function enquireLink()
+    {
+        return $this->smpp->enquireLink();
+    }
+
+    public function getResponse()
+    {
+        return $this->smpp->getResponse();
+    }
+
     public function sendSms($recipient, $message)
     {
         try {
